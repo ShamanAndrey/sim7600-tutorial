@@ -7,17 +7,25 @@ from typing import Iterable
 
 def find_sim7600_port() -> str | None:
     """
-    Automatically detect the SIM7600 modem by scanning available COM ports.
+    Automatically detect the SIM7600 modem AT PORT by scanning available COM ports.
+    The SIM7600 creates multiple virtual ports - we specifically need the AT PORT.
     Returns the port name (e.g., 'COM10') if found, otherwise None.
     """
     ports = list_ports.comports()
+
+    # First pass: Look specifically for "AT PORT" in the description
+    # This is the correct port for AT commands and SMS
     for port in ports:
-        # Check if the description or manufacturer contains SIM7600/Simcom identifiers
+        desc = (port.description or "").lower()
+        if "at port" in desc and ("simcom" in desc or "hs-usb" in desc):
+            return port.device
+
+    # Second pass: Fallback to any Simcom device if AT PORT not found
+    # (for compatibility with other modems)
+    for port in ports:
         desc = (port.description or "").lower()
         manufacturer = (port.manufacturer or "").lower()
-
-        # Look for Simcom or HS-USB AT PORT identifiers
-        if "simcom" in desc or "simcom" in manufacturer or "hs-usb at port" in desc:
+        if "simcom" in desc or "simcom" in manufacturer:
             return port.device
 
     return None
