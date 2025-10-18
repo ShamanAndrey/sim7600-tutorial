@@ -18,8 +18,8 @@ This document contains the steps to publish this repository to GitHub.
 
 Go to https://github.com/new and create a new repository:
 
-- **Name**: `sms-logger` (or your preferred name)
-- **Description**: "SMS Logger for SIM7600 modem on Windows with auto-detection"
+- **Name**: `SIM7600g-H_Tutorial` (or your preferred name)
+- **Description**: "Tutorial for SIM7600G-H modem: SMS logger with auto-detection"
 - **Visibility**: Public
 - ⚠️ **Important**: Do NOT initialize with README, .gitignore, or license (we already have these)
 
@@ -29,7 +29,7 @@ After creating the GitHub repo, run these commands:
 
 ```bash
 # Add your GitHub repository as remote (replace YOUR_USERNAME with your GitHub username)
-git remote add origin https://github.com/YOUR_USERNAME/sms-logger.git
+git remote add origin https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial.git
 
 # Rename branch to main (GitHub's default)
 git branch -M main
@@ -51,8 +51,8 @@ In your GitHub repository settings:
 
 #### About Section
 
-- Add description: "SMS Logger for SIM7600 modem on Windows with auto-detection"
-- Add topics: `sms`, `sim7600`, `python`, `serial-communication`, `at-commands`, `gsm-modem`, `windows`
+- Add description: "Tutorial for SIM7600G-H modem: SMS logger with auto-detection"
+- Add topics: `sim7600g-h`, `sms`, `sim7600`, `python`, `serial-communication`, `at-commands`, `gsm-modem`, `windows`, `tutorial`
 
 #### Optional: Set up GitHub Actions
 

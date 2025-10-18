@@ -1,4 +1,4 @@
-# Contributing to SMS Logger
+# Contributing to SIM7600G-H Tutorial
 
 Thank you for considering contributing to this project! 🎉
 
@@ -7,6 +7,7 @@ Thank you for considering contributing to this project! 🎉
 ### Reporting Bugs
 
 If you find a bug, please open an issue with:
+
 - A clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
@@ -15,6 +16,7 @@ If you find a bug, please open an issue with:
 ### Suggesting Features
 
 Feature suggestions are welcome! Please open an issue describing:
+
 - The feature you'd like to see
 - Why it would be useful
 - How you envision it working
@@ -34,8 +36,8 @@ Feature suggestions are welcome! Please open an issue describing:
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/sms-logger.git
-cd sms-logger
+git clone https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial.git
+cd SIM7600g-H_Tutorial
 
 # Create virtual environment
 python -m venv .venv
@@ -65,4 +67,3 @@ If you have access to other SIM/GSM modems (not just SIM7600), contributions to 
 Feel free to open an issue with your question, or start a discussion.
 
 Thank you for contributing! 🙏
-

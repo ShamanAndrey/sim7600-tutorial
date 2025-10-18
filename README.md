@@ -1,4 +1,4 @@
-# 📱 SMS Logger for SIM7600G-H
+# 📱 SIM7600G-H Tutorial: SMS Logger
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -16,6 +16,8 @@ Perfect for:
 > 💡 **Beginner-friendly!** No prior experience needed. Just follow the steps below.
 
 > 🪟 **Windows only** - This guide is for Windows 10/11. Linux users can adapt with minor changes.
+
+personal note this project was mostly created using AI and I'm using SIM7600g-H 4G HAT (b) for the development of this repository. If you find any issues with your setup please raise and issue.
 
 ## 🛠️ What You'll Need
 
@@ -66,8 +68,8 @@ Open **PowerShell** (search for it in Windows Start menu) and run:
 
 ```powershell
 cd Downloads
-git clone https://github.com/YOUR_USERNAME/sms-logger.git
-cd sms-logger
+git clone https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial.git
+cd SIM7600g-H_Tutorial
 ```
 
 > **Don't have Git?** Download the ZIP from GitHub and extract it, then `cd` to that folder.
@@ -289,7 +291,7 @@ Then try activating the virtual environment again.
 2. **Multiple ports?**: The SIM7600 creates 5 different COM ports - the program auto-selects the right one (AT PORT)
 3. **Manual port**: If auto-detection fails, manually specify: `python -m sms_logger --port COM10`
 4. **Enable debug mode**: Run with `--echo` to see raw modem communication
-5. **Open an issue**: [Report a bug on GitHub](https://github.com/YOUR_USERNAME/sms-logger/issues)
+5. **Open an issue**: [Report a bug on GitHub](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
 
 ## 💡 Project Ideas
 
@@ -318,15 +320,26 @@ Now that you can receive SMS, here are some cool things you could build:
 
 **Share your projects!** Open a discussion on GitHub to show what you built!
 
-## 🤝 Contributing
+## 🤝 Contributing & Development
 
-Built something cool? Found a bug? Want to add a feature?
+Want to add features or modify the code?
 
-- 🐛 [Report bugs](https://github.com/YOUR_USERNAME/sms-logger/issues)
-- 💡 [Suggest features](https://github.com/YOUR_USERNAME/sms-logger/issues)
+- 🛠️ **[Development Guide](DEVELOPMENT.md)** - Learn how to add features and modify the code
+- 🐛 [Report bugs](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
+- 💡 [Suggest features](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
 - 🔧 [Submit pull requests](CONTRIBUTING.md)
 
 We welcome contributions from beginners! Don't be shy - everyone's first contribution counts.
+
+**Popular feature additions:**
+
+- Sending SMS messages
+- Webhook notifications
+- Database storage
+- Desktop notifications
+- Message filtering
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed guides on implementing these!
 
 ## 🔒 Security & Privacy
 

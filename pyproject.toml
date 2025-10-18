@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sms-logger"
+name = "SIM7600g-H_Tutorial"
 version = "0.1.0"
-description = "Receive and log SMS via SIM7600 on Windows"
+description = "Tutorial for SIM7600G-H: Receive and log SMS on Windows"
 authors = [{name = "You"}]
 requires-python = ">=3.10"
 dependencies = [
