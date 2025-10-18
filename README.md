@@ -70,9 +70,11 @@ usage: python -m sms_logger [-h] [--port PORT] [--baud BAUD] [--logfile LOGFILE]
 
 ## Troubleshooting
 
-- **Auto-detection not working?** The program looks for "Simcom" or "HS-USB AT Port" in device descriptions. You can manually specify the port with `--port COM10`.
-- Make sure you have the **AT Port** showing in Device Manager (e.g., `SIMCom HS-USB AT Port (COM10)`).
+- **Auto-detection not working?** The program looks specifically for "AT PORT" in device descriptions. You can manually specify the port with `--port COM10`.
+- **Multiple ports?** The SIM7600 creates several virtual COM ports (NMEA, Modem, Audio, Diagnostics, AT PORT). The program automatically selects the **AT PORT** which is needed for SMS.
+- Make sure you have the **AT Port** showing in Device Manager (e.g., `SIMCom HS-USB AT Port 9001 (COM10)`).
 - If you see nothing, confirm no other app is holding the port (close TeraTerm, Waveshare tools).
+- **Port in use error?** Close other serial terminal applications or restart your computer.
 - Signal check: `AT+CSQ` (10–31 is OK). Registration: `AT+CREG?` should be `...,1` or `...,5`.
 
 ## Contributing
