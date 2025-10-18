@@ -84,6 +84,7 @@ If you encounter any issues or have suggestions, please [open an issue](https://
 ## Security
 
 ⚠️ **Important Security Notes:**
+
 - Never commit your `.env` file - it may contain sensitive configuration
 - The `logs/` directory contains SMS messages and phone numbers - keep it private
 - This project uses `.gitignore` to prevent accidentally committing sensitive data
@@ -91,11 +92,13 @@ If you encounter any issues or have suggestions, please [open an issue](https://
 ## Compatibility
 
 **Tested with:**
+
 - SIM7600 (Simcom HS-USB AT Port)
 - Windows 10/11
 - Python 3.10+
 
 **May work with:**
+
 - Other SIMCom modems with similar AT command support
 - Other GSM/LTE modems (with potential modifications)
 

@@ -64,3 +64,6 @@ dmypy.json
 *.sqlite
 *.sqlite3
 
+# Temporary files
+GITHUB_READY.txt
+
