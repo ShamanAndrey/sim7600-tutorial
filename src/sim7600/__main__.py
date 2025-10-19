@@ -81,8 +81,8 @@ def main():
         "--interval", type=int, default=5, help="Update interval in seconds"
     )
 
-    # Voice subcommand (placeholder for future)
-    voice_parser = subparsers.add_parser("voice", help="Voice operations (coming soon)")
+    # Voice subcommand
+    voice_parser = subparsers.add_parser("voice", help="Voice operations")
     voice_subparsers = voice_parser.add_subparsers(
         dest="voice_command", help="Voice actions"
     )
@@ -90,7 +90,23 @@ def main():
         "dial", help="Make a phone call (coming soon)"
     )
     dial_parser.add_argument("number", help="Phone number to call")
-    
+
+    # Voice listen subcommand
+    listen_parser = voice_subparsers.add_parser(
+        "listen", help="Listen for incoming calls (RING/CLIP)"
+    )
+    listen_parser.add_argument(
+        "--port",
+        default="auto",
+        help="Serial port or 'auto' to auto-detect"
+    )
+    listen_parser.add_argument(
+        "--baud", type=int, default=115200, help="Baud rate (default: 115200)"
+    )
+    listen_parser.add_argument(
+        "--echo", action="store_true", help="Echo raw serial lines (debug)"
+    )
+
     # Dashboard subcommand
     dashboard_parser = subparsers.add_parser("dashboard", help="Launch web dashboard")
     dashboard_parser.add_argument(
@@ -156,35 +172,6 @@ def main():
             else:
                 logger.info(f"Using specified port: {port}")
             
-            # Check for non-ASCII characters and warn user
-            try:
-                args.message.encode("ascii")
-            except UnicodeEncodeError:
-                # Message contains non-ASCII characters
-                print("\n⚠️  WARNING: Your message contains special characters (accents, emoji, etc.)")
-                print("The SIM7600 modem has limited support for these characters.")
-                print("Your message may appear corrupted or garbled on the recipient's phone.")
-                print(f"\nOriginal message: {args.message}")
-                
-                # Show what might be sent
-                import unicodedata
-                normalized = unicodedata.normalize('NFD', args.message)
-                preview = ''
-                for char in normalized:
-                    if ord(char) < 128:
-                        preview += char
-                    elif unicodedata.category(char) == 'Mn':
-                        continue
-                    else:
-                        preview += '?'
-                print(f"May be sent as:     {preview}")
-                
-                response = input("\nDo you want to continue anyway? (y/N): ")
-                if response.lower() != 'y':
-                    logger.info("Message sending cancelled by user.")
-                    sys.exit(0)
-                print()  # Empty line for clarity
-            
             # Open modem
             modem = Modem(port, args.baud, echo_raw=args.echo)
             try:
@@ -194,9 +181,6 @@ def main():
                 # Send SMS
                 logger.info(f"Sending SMS to {args.recipient}...")
                 logger.info(f"Message: {args.message}")
-                if args.encoding != "auto":
-                    logger.info(f"Using {args.encoding.upper()} encoding")
-                
                 if modem.send_sms(args.recipient, args.message, encoding=args.encoding):
                     logger.info("✅ SMS sent successfully!")
                     sys.exit(0)
@@ -226,6 +210,41 @@ def main():
             print("📞 Voice calling feature coming soon!")
             print(f"Will call: {args.number}")
             sys.exit(1)
+        elif args.voice_command == "listen":
+            # Listen for incoming calls
+            from .modem import Modem, find_sim7600_port
+            
+            # Resolve port
+            port = args.port
+            if port.lower() == "auto":
+                port = find_sim7600_port()
+                if not port:
+                    print("❌ Modem not found. Specify --port.")
+                    sys.exit(1)
+            
+            modem = Modem(port, args.baud, echo_raw=args.echo)
+            try:
+                modem.open()
+                modem.init_voice_listen()
+                print("📞 Listening for incoming calls... (Ctrl+C to stop)")
+                
+                while True:
+                    line = modem.readline()
+                    if not line:
+                        continue
+                    
+                    # Typical indications:
+                    # RING
+                    # +CLIP: "+1234567890",145,,,"",0
+                    if line == "RING":
+                        print("RING")
+                    elif line.startswith("+CLIP:"):
+                        print(line)
+            except KeyboardInterrupt:
+                print("Stopped.")
+                sys.exit(0)
+            finally:
+                modem.close()
         else:
             voice_parser.print_help()
     elif args.command == "dashboard":

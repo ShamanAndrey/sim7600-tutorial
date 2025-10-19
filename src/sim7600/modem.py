@@ -86,6 +86,20 @@ class Modem:
             # Read a few lines to consume OK / errors
             self._drain(0.6)
 
+    def init_voice_listen(self):
+        """
+        Initialize modem to report incoming call indications with caller ID.
+        Enables: verbose errors, caller ID presentation, and ring reporting.
+        """
+        for cmd in (
+            "AT",
+            "AT+CMEE=2",     # verbose errors
+            "AT+CLIP=1",     # enable caller ID reporting: +CLIP: "<num>",...
+            "AT+CRC=1",      # extended ring indications (optional)
+        ):
+            self.write_cmd(cmd)
+            self._drain(0.5)
+
     def _drain(self, dur: float = 0.5):
         t0 = time.time()
         while time.time() - t0 < dur:

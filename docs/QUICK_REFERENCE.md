@@ -37,6 +37,16 @@ python -m sim7600 sms receive --echo           # Debug mode
 python -m sim7600 sms receive --no-console     # Background mode
 ```
 
+### 📞 Voice - Listen for Incoming Calls
+
+```powershell
+python -m sim7600 voice listen                 # Auto-detect port and listen
+python -m sim7600 voice listen --port COM10    # Specify port
+python -m sim7600 voice listen --echo          # Show raw RING/CLIP lines
+```
+
+Output includes `RING` and `+CLIP: "+123..."` lines when calls arrive.
+
 ## Common Options
 
 | Option         | Description                  | Example                |
@@ -223,5 +233,6 @@ python -m sim7600 --help              # Main help
 python -m sim7600 sms --help          # SMS commands
 python -m sim7600 sms send --help     # Send options
 python -m sim7600 sms receive --help  # Receive options
+python -m sim7600 voice listen --help # Voice listen options
 python -m sim7600 dashboard --help    # Dashboard options
 ```
