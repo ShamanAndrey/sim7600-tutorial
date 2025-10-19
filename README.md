@@ -3,14 +3,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-**Just got your SIM7600G-H modem and want to play with it?** This project lets you receive and log SMS messages automatically on your Windows computer! 🚀
+**Complete toolkit for your SIM7600G-H modem!** Send and receive SMS, monitor messages in real-time with a web dashboard, and automate communications on your Windows computer! 🚀
 
 Perfect for:
 
-- 📱 Testing your new SIM7600G-H modem
-- 🧪 Learning about GSM/LTE modems and AT commands
+- 📱 **Send & Receive SMS** - Full two-way SMS communication
+- 🌐 **Web Dashboard** - Modern UI for managing messages
 - 🔔 Building SMS notification systems
 - 📊 Logging messages for analysis
+- 🤖 IoT and automation projects
 - 🎓 Educational projects and experimenting
 
 > 💡 **Beginner-friendly!** No prior experience needed. Just follow the steps below.
@@ -38,11 +39,33 @@ That's it! Everything else will be installed automatically.
 
 ## ✨ What This Does
 
+### 📥 SMS Receiving
+
 - **Automatically finds your modem** - no manual port configuration!
 - **Receives SMS in real-time** - messages appear as they arrive
-- **Logs everything** - saves to text files and optional JSON format
+- **Logs everything** - saves to text files and JSON format
 - **Shows messages on screen** - see incoming SMS instantly
+
+### 📤 SMS Sending
+
+- **Send SMS from CLI** - Quick command-line sending
+- **Character encoding support** - Handles special characters and accents
+- **User-friendly warnings** - Preview message before sending
+
+### 🌐 Web Dashboard
+
+- **Modern web interface** - Send and view messages in your browser
+- **Real-time updates** - Messages refresh automatically
+- **Phone number autocomplete** - Quick access to your contacts
+- **Minimal, clean design** - Focused on usability
+- **Message history** - View sent and received messages
+
+### 🔧 Developer-Friendly
+
 - **Easy to use** - just run one command!
+- **No code duplication** - Modular package architecture
+- **Full logging** - Debug with detailed logs
+- **Thread-safe** - Concurrent sending and receiving
 
 ## 🚀 Quick Start Guide
 
@@ -85,11 +108,16 @@ python -m venv .venv
 # Activate it
 .\.venv\Scripts\Activate.ps1
 
-# Install the program
-pip install -e .
+# Install with web dashboard (recommended)
+pip install -e .[dashboard]
+
+# Or install CLI only (no web interface)
+# pip install -e .
 ```
 
 > 💡 You should see `(.venv)` at the start of your PowerShell prompt now.
+>
+> 🌐 The `[dashboard]` option installs Flask for the web interface. Skip it if you only need CLI.
 
 ### Step 5: Test Your Modem
 
@@ -122,16 +150,69 @@ python -m sim7600 sms receive
 
 Press `Ctrl+C` to stop the program.
 
-> 💡 **Note:** Currently only SMS receiving is implemented. GPS and voice features coming soon!
+## 🎮 Usage Guide
 
-## 🎮 What Can You Do Now?
+### 🌐 Web Dashboard (Recommended)
 
-### View Your Received Messages
+The easiest way to use the toolkit - a modern web interface!
 
-All messages are saved to:
+```powershell
+python -m sim7600 dashboard
+```
+
+Then open `http://127.0.0.1:5000` in your browser.
+
+**Features:**
+
+- 📤 Send SMS with one click
+- 📥 View all received messages
+- ⚡ Real-time updates every 5 seconds
+- 🔍 Phone number autocomplete
+- ⚠️ Character encoding warnings
+- 📊 Message history (sent & received)
+
+Press `Ctrl+C` to stop.
+
+### 📤 Send SMS from CLI
+
+Send a quick SMS from the command line:
+
+```powershell
+# Basic usage
+python -m sim7600 sms send "+1234567890" "Hello from SIM7600!"
+
+# With debug output
+python -m sim7600 sms send "+1234567890" "Test message" --echo
+```
+
+**Features:**
+
+- ✅ Auto-detects modem
+- ⚠️ Warns about special characters
+- 🔄 Shows preview of converted message
+- 📝 Confirmation prompt for non-ASCII text
+
+### 📥 Receive SMS
+
+Continuous SMS monitoring:
+
+```powershell
+# Default: shows messages on screen + logs to file
+python -m sim7600 sms receive
+
+# Silent mode (background operation)
+python -m sim7600 sms receive --no-console
+
+# With debug output
+python -m sim7600 sms receive --echo
+```
+
+### 📊 View Your Messages
+
+All messages are automatically saved to:
 
 - `logs/sms.log` - Easy to read text format
-- `logs/sms.jsonl` - JSON format for programming
+- `logs/sms.jsonl` - JSON format (with direction: sent/received)
 
 Open them with Notepad or any text editor!
 
@@ -166,58 +247,95 @@ Edit values like:
 - `LOG_PATH=logs/sms.log`
 - `JSONL_PATH=logs/sms.jsonl`
 
-### Future Features (Coming Soon!)
+## 📋 Feature Status
+
+### ✅ Implemented
+
+- **SMS Receiving** - Real-time message monitoring
+- **SMS Sending** - CLI and web dashboard
+- **Web Dashboard** - Modern UI for messaging
+- **Message Logging** - Text and JSON formats
+- **Auto-detection** - Finds modem automatically
+- **Character Encoding** - Smart handling of special characters
+
+### 🚧 Coming Soon
 
 ```powershell
-# SMS (current)
-python -m sim7600 sms receive          # ✅ Working now
-python -m sim7600 sms send "+123:Hi"   # 🚧 Coming soon
+# GPS
+python -m sim7600 gps track            # Track GPS location
 
-# GPS (planned)
-python -m sim7600 gps track            # 🚧 Coming soon
-
-# Voice (planned)
-python -m sim7600 voice dial "+123"    # 🚧 Coming soon
+# Voice
+python -m sim7600 voice dial "+123"    # Make phone calls
 ```
 
-## 📝 Command Options
+## 📝 Command Reference
 
-### Basic Usage
+### Web Dashboard
 
 ```powershell
-python -m sim7600 sms receive              # Start receiving SMS (most common)
-python -m sim7600 sms receive --init-only  # Just test the connection
-python -m sim7600 sms --help               # Show all SMS options
+python -m sim7600 dashboard              # Launch web interface
+python -m sim7600 dashboard --port 8080  # Custom port
+python -m sim7600 dashboard --host 0.0.0.0  # Allow network access
 ```
 
-### All Available Options
+### SMS Receiving
 
-| Option         | What it does                                | Example                     |
+```powershell
+python -m sim7600 sms receive              # Start receiving SMS
+python -m sim7600 sms receive --init-only  # Just test connection
+python -m sim7600 sms receive --echo       # Debug mode
+```
+
+**Options:**
+
+| Option         | Description                                 | Example                     |
 | -------------- | ------------------------------------------- | --------------------------- |
 | `--port`       | Specify COM port (auto-detected by default) | `--port COM10`              |
 | `--logfile`    | Where to save messages                      | `--logfile my_sms.log`      |
 | `--json-out`   | Save as JSON too                            | `--json-out messages.jsonl` |
 | `--no-console` | Don't show messages on screen (silent mode) | `--no-console`              |
 | `--init-only`  | Test connection and exit                    | `--init-only`               |
-| `--echo`       | Show raw modem responses (for debugging)    | `--echo`                    |
+| `--echo`       | Show raw modem responses (debugging)        | `--echo`                    |
+
+### SMS Sending
+
+```powershell
+python -m sim7600 sms send "+1234567890" "Your message"
+python -m sim7600 sms send "+1234567890" "Test" --echo  # Debug mode
+```
+
+**Options:**
+
+| Option       | Description                      | Example          |
+| ------------ | -------------------------------- | ---------------- |
+| `--port`     | Specify COM port                 | `--port COM10`   |
+| `--echo`     | Show raw modem responses         | `--echo`         |
+| `--encoding` | Force encoding (auto, gsm, ucs2) | `--encoding gsm` |
 
 ### Examples
 
 ```powershell
-# Basic - just receive and log SMS
+# Web dashboard (easiest!)
+python -m sim7600 dashboard
+
+# Receive SMS continuously
 python -m sim7600 sms receive
 
-# Silent mode - runs in background without showing messages
+# Send a quick SMS
+python -m sim7600 sms send "+1234567890" "Hello!"
+
+# Send with special characters (will show preview)
+python -m sim7600 sms send "+1234567890" "Café ☕"
+
+# Silent background receiving
 python -m sim7600 sms receive --no-console
 
 # Custom log location
 python -m sim7600 sms receive --logfile C:\MyLogs\sms.log
 
-# Save to both text and JSON
-python -m sim7600 sms receive --json-out messages.jsonl
-
-# Force a specific COM port
-python -m sim7600 sms receive --port COM10
+# Debug mode (see AT commands)
+python -m sim7600 sms receive --echo
+python -m sim7600 sms send "+123" "Test" --echo
 ```
 
 ## 🔧 Troubleshooting
@@ -300,6 +418,38 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 Then try activating the virtual environment again.
+
+### Dashboard Issues
+
+**"Dashboard not installed" or "No module named sim7600_dashboard"**
+
+```powershell
+pip install -e .[dashboard]
+```
+
+**Can't access dashboard from another computer**
+
+```powershell
+# Allow network access (default is localhost only)
+python -m sim7600 dashboard --host 0.0.0.0
+```
+
+**Dashboard stuck on "Sending..." button**
+
+Make sure you're running the latest code:
+
+```powershell
+Ctrl+C  # Stop dashboard
+python -m sim7600 dashboard  # Restart
+```
+
+**"Failed to send SMS" in dashboard but CLI works**
+
+The modem might be in use. Check:
+
+1. Close the CLI receiver if it's running
+2. Check terminal output for error messages
+3. Try restarting the dashboard
 
 ### Still having issues?
 
@@ -408,6 +558,25 @@ Want to understand how this works? Check out:
 - **Python**: 3.10, 3.11, 3.12
 
 Should also work with: SIM7600A, SIM7600E, SIM7600SA-H, and similar SIMCom modems.
+
+## 📚 Documentation
+
+### Core Documentation
+
+- 📖 [README.md](README.md) - This file (getting started guide)
+- 📋 [CHANGELOG.md](CHANGELOG.md) - Version history and feature updates
+- 📝 [QUICK_REFERENCE.md](docs/QUICK_REFERENCE.md) - Command cheat sheet
+
+### Feature-Specific
+
+- 🌐 [Web Dashboard Guide](src/sim7600_dashboard/README.md) - Dashboard documentation
+- 📱 [Usage Examples](docs/USAGE_EXAMPLES.md) - Code examples and recipes
+- 🔧 [Development Guide](docs/DEVELOPMENT.md) - For contributors
+
+### Reference
+
+- 🏗️ [Architecture](docs/ADDING_PACKAGES.md) - Package structure
+- 📊 [AT Commands](docs/AT_COMMANDS.md) - Modem command reference (if exists)
 
 ## 📄 License
 

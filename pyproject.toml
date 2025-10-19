@@ -13,6 +13,11 @@ dependencies = [
     "python-dotenv>=1.0.1",
 ]
 
+[project.optional-dependencies]
+dashboard = [
+    "flask>=3.0.0",
+]
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
@@ -21,3 +26,4 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 sim7600 = ["py.typed"]
+sim7600_dashboard = ["templates/*", "static/*"]

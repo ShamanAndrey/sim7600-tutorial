@@ -90,6 +90,25 @@ def main():
         "dial", help="Make a phone call (coming soon)"
     )
     dial_parser.add_argument("number", help="Phone number to call")
+    
+    # Dashboard subcommand
+    dashboard_parser = subparsers.add_parser("dashboard", help="Launch web dashboard")
+    dashboard_parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Host to bind to (default: 127.0.0.1)"
+    )
+    dashboard_parser.add_argument(
+        "--port",
+        type=int,
+        default=5000,
+        help="Port to bind to (default: 5000)"
+    )
+    dashboard_parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Enable debug mode"
+    )
 
     args = parser.parse_args()
 
@@ -209,6 +228,17 @@ def main():
             sys.exit(1)
         else:
             voice_parser.print_help()
+    elif args.command == "dashboard":
+        try:
+            from sim7600_dashboard import run_dashboard
+            run_dashboard(host=args.host, port=args.port, debug=args.debug)
+        except ImportError:
+            print("❌ Dashboard not installed!")
+            print("\nTo install the dashboard, run:")
+            print("  pip install -e .[dashboard]")
+            print("\nOr run it directly:")
+            print("  python -m sim7600_dashboard")
+            sys.exit(1)
     else:
         parser.print_help()
 

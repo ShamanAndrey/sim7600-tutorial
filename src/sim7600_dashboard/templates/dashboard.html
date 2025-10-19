@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📱 SIM7600 Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1>📱 SIM7600 SMS Dashboard</h1>
+        <div class="status-bar">
+          <span id="status" class="status disconnected">● Disconnected</span>
+          <span id="port" class="port"></span>
+          <span id="message-count" class="count">0 messages</span>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Send SMS Panel -->
+        <div class="panel send-panel">
+          <h2>📤 Send SMS</h2>
+          <form id="sendForm">
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <div class="autocomplete-wrapper">
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="+1234567890"
+                  autocomplete="off"
+                  required
+                />
+                <div id="suggestions" class="suggestions"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                rows="4"
+                placeholder="Type your message..."
+                required
+              ></textarea>
+              <div class="char-count">
+                <span id="charCount">0</span> / 160 characters
+              </div>
+            </div>
+            <div id="warning" class="warning" style="display: none">
+              <strong>⚠️ Warning:</strong> Special characters detected!
+              <div id="preview"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Send SMS</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="clearForm()"
+            >
+              Clear
+            </button>
+          </form>
+          <div id="sendStatus" class="status-message"></div>
+        </div>
+
+        <!-- Received Messages Panel -->
+        <div class="panel messages-panel">
+          <div class="panel-header">
+            <h2>📥 Received Messages</h2>
+            <button class="btn btn-small" onclick="refreshMessages()">
+              🔄 Refresh
+            </button>
+          </div>
+          <div id="messagesList" class="messages-list">
+            <div class="no-messages">No messages yet</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>
+          SIM7600 SMS Manager |
+          <a
+            href="https://github.com/YOUR_USERNAME/sim7600-tutorial"
+            target="_blank"
+            >GitHub</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
