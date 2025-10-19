@@ -60,6 +60,8 @@ That's it! Everything else will be installed automatically.
 - **Minimal, clean design** - Focused on usability
 - **Message history** - View sent and received messages
 
+![SIM7600 SMS Dashboard](docs/dashboard_image.png)
+
 ### 🔧 Developer-Friendly
 
 - **Easy to use** - just run one command!
