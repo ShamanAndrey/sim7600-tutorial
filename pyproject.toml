@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "SIM7600g-H_Tutorial"
+name = "sim7600-tutorial"
 version = "0.1.0"
-description = "Tutorial for SIM7600G-H: Receive and log SMS on Windows"
+description = "Tutorial for SIM7600: SMS, GPS, and Voice on Windows"
 authors = [{name = "You"}]
 requires-python = ">=3.10"
 dependencies = [

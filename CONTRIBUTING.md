@@ -1,4 +1,4 @@
-# Contributing to SIM7600G-H Tutorial
+# Contributing to SIM7600 Tutorial
 
 Thank you for considering contributing to this project! 🎉
 
@@ -36,8 +36,8 @@ Feature suggestions are welcome! Please open an issue describing:
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial.git
-cd SIM7600g-H_Tutorial
+git clone https://github.com/YOUR_USERNAME/sim7600-tutorial.git
+cd sim7600-tutorial
 
 # Create virtual environment
 python -m venv .venv

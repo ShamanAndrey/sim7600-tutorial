@@ -5,7 +5,7 @@ This guide will help you understand the project structure and show you how to ad
 ## 📁 Project Structure
 
 ```
-SIM7600g-H_Tutorial/
+sim7600-tutorial/
 ├── src/
 │   └── sim7600/
 │       ├── __init__.py          # Package initialization
@@ -580,8 +580,8 @@ See **[ADDING_PACKAGES.md](ADDING_PACKAGES.md)** for a complete guide on:
 
 ## 🆘 Need Help?
 
-- 💬 Open a [GitHub Discussion](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/discussions)
-- 🐛 Report bugs as [Issues](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
+- 💬 Open a [GitHub Discussion](https://github.com/YOUR_USERNAME/sim7600-tutorial/discussions)
+- 🐛 Report bugs as [Issues](https://github.com/YOUR_USERNAME/sim7600-tutorial/issues)
 - 📧 Check existing issues for solutions
 
 Happy coding! 🚀

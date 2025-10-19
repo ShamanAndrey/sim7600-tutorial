@@ -133,7 +133,7 @@ Just change the import:
 
 - 📖 Check the updated [README.md](README.md)
 - 🛠️ Read [DEVELOPMENT.md](DEVELOPMENT.md) for adding features
-- 🐛 [Open an issue](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
+- 🐛 [Open an issue](https://github.com/YOUR_USERNAME/sim7600-tutorial/issues)
 
 ## Summary
 

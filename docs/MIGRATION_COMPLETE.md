@@ -55,7 +55,7 @@ cc358de Clean up __main__.py formatting
 ## 📂 New Project Structure
 
 ```
-SIM7600g-H_Tutorial/
+sim7600-tutorial/
 ├── src/
 │   └── sim7600/                 # ← Renamed from sms_logger
 │       ├── __init__.py

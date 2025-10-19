@@ -17,7 +17,7 @@ You might want to add another package folder when:
 Create a new folder in `src/`:
 
 ```
-SIM7600g-H_Tutorial/
+sim7600-tutorial/
 ├── src/
 │   ├── sim7600/          # Your existing package
 │   │   ├── __init__.py
@@ -456,7 +456,7 @@ python -m sms_api
 Your final structure might look like:
 
 ```
-SIM7600g-H_Tutorial/
+sim7600-tutorial/
 ├── src/
 │   ├── sim7600/      # Core SMS logger
 │   ├── sms_dashboard/   # Web UI

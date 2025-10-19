@@ -18,8 +18,8 @@ This document contains the steps to publish this repository to GitHub.
 
 Go to https://github.com/new and create a new repository:
 
-- **Name**: `SIM7600g-H_Tutorial` (or your preferred name)
-- **Description**: "Tutorial for SIM7600G-H modem: SMS logger with auto-detection"
+- **Name**: `sim7600-tutorial` (lowercase with hyphens for better discoverability)
+- **Description**: "Tutorial for SIM7600: SMS, GPS, and Voice on Windows"
 - **Visibility**: Public
 - ⚠️ **Important**: Do NOT initialize with README, .gitignore, or license (we already have these)
 
@@ -29,7 +29,7 @@ After creating the GitHub repo, run these commands:
 
 ```bash
 # Add your GitHub repository as remote (replace YOUR_USERNAME with your GitHub username)
-git remote add origin https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial.git
+git remote add origin https://github.com/YOUR_USERNAME/sim7600-tutorial.git
 
 # Rename branch to main (GitHub's default)
 git branch -M main

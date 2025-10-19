@@ -1,4 +1,4 @@
-# 📱 SIM7600G-H Tutorial: SMS Logger
+# 📱 SIM7600 Tutorial: SMS, GPS & Voice
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -68,8 +68,8 @@ Open **PowerShell** (search for it in Windows Start menu) and run:
 
 ```powershell
 cd Downloads
-git clone https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial.git
-cd SIM7600g-H_Tutorial
+git clone https://github.com/YOUR_USERNAME/sim7600-tutorial.git
+cd sim7600-tutorial
 ```
 
 > **Don't have Git?** Download the ZIP from GitHub and extract it, then `cd` to that folder.
@@ -307,7 +307,7 @@ Then try activating the virtual environment again.
 2. **Multiple ports?**: The SIM7600 creates 5 different COM ports - the program auto-selects the right one (AT PORT)
 3. **Manual port**: If auto-detection fails, manually specify: `python -m sim7600 sms receive --port COM10`
 4. **Enable debug mode**: Run with `--echo` to see raw modem communication
-5. **Open an issue**: [Report a bug on GitHub](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
+5. **Open an issue**: [Report a bug on GitHub](https://github.com/YOUR_USERNAME/sim7600-tutorial/issues)
 
 ## 💡 Project Ideas
 
@@ -341,8 +341,8 @@ Now that you can receive SMS, here are some cool things you could build:
 Want to add features or modify the code?
 
 - 🛠️ **[Development Guide](DEVELOPMENT.md)** - Learn how to add features and modify the code
-- 🐛 [Report bugs](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
-- 💡 [Suggest features](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
+- 🐛 [Report bugs](https://github.com/YOUR_USERNAME/sim7600-tutorial/issues)
+- 💡 [Suggest features](https://github.com/YOUR_USERNAME/sim7600-tutorial/issues)
 - 🔧 [Submit pull requests](CONTRIBUTING.md)
 
 We welcome contributions from beginners! Don't be shy - everyone's first contribution counts.
@@ -355,7 +355,7 @@ We welcome contributions from beginners! Don't be shy - everyone's first contrib
 - Desktop notifications
 - Message filtering
 
-See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed guides on implementing these!
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed guides on implementing these!
 
 ## 🔒 Security & Privacy
 
@@ -366,7 +366,26 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed guides on implementing these!
 - This project uses `.gitignore` to protect your data automatically
 - For production use, add encryption and access controls
 
-## 📚 Learning Resources
+## 📚 Documentation
+
+### Quick Reference
+
+- **[README.md](README.md)** - You're here! Quick start and usage guide
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute to the project
+
+### Developer Guides
+
+- **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)** - Add features and understand the code
+- **[docs/ADDING_PACKAGES.md](docs/ADDING_PACKAGES.md)** - Create multi-package projects
+- **[docs/PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md)** - High-level architecture explanation
+- **[docs/ARCHITECTURE_DECISIONS.md](docs/ARCHITECTURE_DECISIONS.md)** - Design rationale and choices
+
+### Migration & Publishing
+
+- **[docs/MIGRATION_GUIDE.md](docs/MIGRATION_GUIDE.md)** - Upgrade from old `sms_logger` version
+- **[docs/PUBLISH.md](docs/PUBLISH.md)** - Publishing to GitHub
+
+## 📖 Learning Resources
 
 Want to understand how this works? Check out:
 
