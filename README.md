@@ -96,7 +96,7 @@ pip install -e .
 Let's check if everything works:
 
 ```powershell
-python -m sms_logger --init-only
+python -m sim7600 sms receive --init-only
 ```
 
 You should see:
@@ -115,12 +115,14 @@ You should see:
 Now run the program without the `--init-only` flag:
 
 ```powershell
-python -m sms_logger
+python -m sim7600 sms receive
 ```
 
 **That's it!** The program is now running and waiting for SMS messages. Send a text to your SIM card's number and watch it appear on screen! 📱✨
 
 Press `Ctrl+C` to stop the program.
+
+> 💡 **Note:** Currently only SMS receiving is implemented. GPS and voice features coming soon!
 
 ## 🎮 What Can You Do Now?
 
@@ -138,7 +140,7 @@ Open them with Notepad or any text editor!
 Want it to run 24/7? Use:
 
 ```powershell
-python -m sms_logger --no-console
+python -m sim7600 sms receive --no-console
 ```
 
 ### Save to JSON
@@ -146,7 +148,7 @@ python -m sms_logger --no-console
 Track messages in JSON format:
 
 ```powershell
-python -m sms_logger --json-out logs/messages.jsonl
+python -m sim7600 sms receive --json-out logs/messages.jsonl
 ```
 
 ### Custom Configuration
@@ -164,14 +166,28 @@ Edit values like:
 - `LOG_PATH=logs/sms.log`
 - `JSONL_PATH=logs/sms.jsonl`
 
+### Future Features (Coming Soon!)
+
+```powershell
+# SMS (current)
+python -m sim7600 sms receive          # ✅ Working now
+python -m sim7600 sms send "+123:Hi"   # 🚧 Coming soon
+
+# GPS (planned)
+python -m sim7600 gps track            # 🚧 Coming soon
+
+# Voice (planned)
+python -m sim7600 voice dial "+123"    # 🚧 Coming soon
+```
+
 ## 📝 Command Options
 
 ### Basic Usage
 
 ```powershell
-python -m sms_logger              # Start receiving SMS (most common)
-python -m sms_logger --init-only  # Just test the connection
-python -m sms_logger --help       # Show all options
+python -m sim7600 sms receive              # Start receiving SMS (most common)
+python -m sim7600 sms receive --init-only  # Just test the connection
+python -m sim7600 sms --help               # Show all SMS options
 ```
 
 ### All Available Options
@@ -189,19 +205,19 @@ python -m sms_logger --help       # Show all options
 
 ```powershell
 # Basic - just receive and log SMS
-python -m sms_logger
+python -m sim7600 sms receive
 
 # Silent mode - runs in background without showing messages
-python -m sms_logger --no-console
+python -m sim7600 sms receive --no-console
 
 # Custom log location
-python -m sms_logger --logfile C:\MyLogs\sms.log
+python -m sim7600 sms receive --logfile C:\MyLogs\sms.log
 
 # Save to both text and JSON
-python -m sms_logger --json-out messages.jsonl
+python -m sim7600 sms receive --json-out messages.jsonl
 
 # Force a specific COM port
-python -m sms_logger --port COM10
+python -m sim7600 sms receive --port COM10
 ```
 
 ## 🔧 Troubleshooting
@@ -258,7 +274,7 @@ You forgot to add Python to PATH during installation!
 
 ```powershell
 # Test connection
-python -m sms_logger --init-only
+python -m sim7600 sms receive --init-only
 ```
 
 **Check signal strength:**
@@ -289,7 +305,7 @@ Then try activating the virtual environment again.
 
 1. **Check Device Manager**: You should see "Simcom HS-USB AT PORT 9001 (COM10)" or similar
 2. **Multiple ports?**: The SIM7600 creates 5 different COM ports - the program auto-selects the right one (AT PORT)
-3. **Manual port**: If auto-detection fails, manually specify: `python -m sms_logger --port COM10`
+3. **Manual port**: If auto-detection fails, manually specify: `python -m sim7600 sms receive --port COM10`
 4. **Enable debug mode**: Run with `--echo` to see raw modem communication
 5. **Open an issue**: [Report a bug on GitHub](https://github.com/YOUR_USERNAME/SIM7600g-H_Tutorial/issues)
 

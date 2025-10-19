@@ -5,9 +5,9 @@ This guide will help you understand the project structure and show you how to ad
 ## 📁 Project Structure
 
 ```
-sms-logger/
+SIM7600g-H_Tutorial/
 ├── src/
-│   └── sms_logger/
+│   └── sim7600/
 │       ├── __init__.py          # Package initialization
 │       ├── __main__.py          # Entry point for `python -m sms_logger`
 │       ├── cli.py               # Command-line interface & main logic
@@ -429,7 +429,7 @@ Create `tests/test_parser.py`:
 
 ```python
 import pytest
-from sms_logger.parser import parse_cmt_header
+from sim7600.parser import parse_cmt_header
 
 def test_parse_cmt_header():
     line = '+CMT: "+1234567890","","25/10/18,14:30:00+00"'

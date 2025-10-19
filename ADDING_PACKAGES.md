@@ -19,7 +19,7 @@ Create a new folder in `src/`:
 ```
 SIM7600g-H_Tutorial/
 ├── src/
-│   ├── sms_logger/          # Your existing package
+│   ├── sim7600/          # Your existing package
 │   │   ├── __init__.py
 │   │   ├── __main__.py
 │   │   ├── cli.py
@@ -214,15 +214,15 @@ Your packages can import from each other:
 
 ```python
 # Import from the other package
-from sms_logger.parser import parse_cmt_header
-from sms_logger.modem import find_sim7600_port
+from sim7600.parser import parse_cmt_header
+from sim7600.modem import find_sim7600_port
 
 # Use the functions
 port = find_sim7600_port()
 print(f"Found modem on: {port}")
 ```
 
-**In `sms_logger/cli.py`:**
+**In `sim7600/cli.py`:**
 
 ```python
 # You could also import from dashboard if needed
@@ -458,7 +458,7 @@ Your final structure might look like:
 ```
 SIM7600g-H_Tutorial/
 ├── src/
-│   ├── sms_logger/      # Core SMS logger
+│   ├── sim7600/      # Core SMS logger
 │   ├── sms_dashboard/   # Web UI
 │   ├── sms_api/         # REST API
 │   └── sms_tools/       # CLI utilities
@@ -551,7 +551,7 @@ python run_all.py
 
 ## Common Package Ideas
 
-- `sms_logger` - Core SMS receiving (existing)
+- `sim7600` - Core modem functionality (existing)
 - `sms_sender` - SMS sending functionality
 - `sms_api` - REST API server
 - `sms_dashboard` - Web interface
@@ -569,7 +569,7 @@ When adding packages, update your README.md:
 
 This project consists of multiple packages:
 
-- **sms_logger** - Core SMS receiving and logging
+- **sim7600** - Core SMS receiving and logging
 - **sms_dashboard** - Web-based message viewer
 - **sms_api** - REST API for programmatic access
 - **sms_tools** - Command-line utilities
@@ -578,7 +578,7 @@ This project consists of multiple packages:
 
 ```powershell
 # SMS Logger
-python -m sms_logger
+python -m sim7600 sms receive
 
 # Web Dashboard
 python -m sms_dashboard

@@ -48,7 +48,7 @@ python -m venv .venv
 pip install -e .
 
 # Run the program
-python -m sms_logger --init-only
+python -m sim7600 sms receive --init-only
 ```
 
 ### Code Style
