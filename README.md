@@ -72,7 +72,7 @@ That's it! Everything else will be installed automatically.
 ### Step 1: Connect Your Modem
 
 1. Insert your SIM card into the SIM7600G-H modem
-2. Connect the antenna (📡 Important for getting signal!)
+2. Connect the antenna (📡 optional, depends on signal strength)
 3. Plug the USB cable into your computer
 4. Wait for Windows to install drivers (this happens automatically)
 5. Check Device Manager - you should see several "Simcom HS-USB" ports
