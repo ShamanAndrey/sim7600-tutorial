@@ -23,9 +23,9 @@ python -m sim7600 dashboard --host 0.0.0.0     # Network accessible
 ### 📤 Send SMS
 
 ```powershell
-python -m sim7600 sms send "+NUMBER" "MESSAGE"           # Basic send
+python -m sim7600 sms send "+NUMBER" "MESSAGE"           # Basic send (GSM text mode)
 python -m sim7600 sms send "+NUMBER" "MESSAGE" --echo    # With debug
-python -m sim7600 sms send "+NUMBER" "Café"              # Special chars (shows preview)
+python -m sim7600 sms send "+NUMBER" "Cafe"               # Avoid accents/emoji in text mode
 ```
 
 ### 📥 Receive SMS
@@ -119,12 +119,16 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## Character Encoding
 
-| Character Type   | Support      | Behavior                             |
-| ---------------- | ------------ | ------------------------------------ |
-| ASCII (a-z, 0-9) | ✅ Full      | Sent as-is                           |
-| GSM Extended     | ✅ Full      | Euro (€), brackets, etc.             |
-| Accents (é, ñ)   | ⚠️ Converted | é→e, ñ→n (shows preview before send) |
-| Emoji (😀, ☕)   | ⚠️ Converted | Replaced with ? (shows preview)      |
+- Text mode (`AT+CMGF=1`) sends **GSM 7‑bit only**.
+- Unicode/UCS2 sending requires **PDU mode** (`AT+CMGF=0`, DCS=0x08).
+- See `docs/SMS_CHARACTER_LIMITS.md` for exact limits (160/153 GSM; 70/67 UCS2).
+
+| Character Type   | Support (Text Mode) | Behavior                     |
+| ---------------- | ------------------- | ---------------------------- |
+| ASCII (a-z, 0-9) | ✅ Full             | Sent as-is                   |
+| GSM Extended     | ✅ Full             | Euro (€), brackets, etc.     |
+| Accents (é, ñ)   | ⚠️ Converted        | é→e, ñ→n (display dependent) |
+| Emoji (😀, ☕)   | ❌ Not supported    | Use PDU mode for Unicode     |
 
 ## API Endpoints (Dashboard)
 
@@ -206,9 +210,9 @@ sim7600-tutorial/
 ## Related Documentation
 
 - 📖 [README.md](../README.md) - Full guide
-- 📋 [CHANGELOG.md](../CHANGELOG.md) - Version history
-- 🌐 [Dashboard README](../src/sim7600_dashboard/README.md) - Web UI docs
-- 📚 [Usage Examples](USAGE_EXAMPLES.md) - Code examples
+- 📚 [SMS Character Limits](SMS_CHARACTER_LIMITS.md)
+- 🌐 [Dashboard README](../src/sim7600_dashboard/README.md)
+- 📚 [Usage Examples](USAGE_EXAMPLES.md)
 
 ---
 
