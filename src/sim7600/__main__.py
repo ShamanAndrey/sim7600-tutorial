@@ -47,12 +47,29 @@ def main():
         "--echo", action="store_true", help="Echo raw serial lines (debug)"
     )
 
-    # SMS send subcommand (placeholder for future)
+    # SMS send subcommand
     send_parser = sms_subparsers.add_parser(
-        "send", help="Send an SMS message (coming soon)"
+        "send", help="Send an SMS message"
     )
-    send_parser.add_argument("recipient", help="Phone number to send to")
+    send_parser.add_argument("recipient", help="Phone number (e.g., +1234567890)")
     send_parser.add_argument("message", help="Message text to send")
+    send_parser.add_argument(
+        "--port",
+        default="auto",
+        help="Serial port or 'auto' to auto-detect"
+    )
+    send_parser.add_argument(
+        "--baud", type=int, default=115200, help="Baud rate (default: 115200)"
+    )
+    send_parser.add_argument(
+        "--encoding",
+        default="auto",
+        choices=["auto", "gsm", "ucs2"],
+        help="Character encoding: auto (default), gsm (ASCII), ucs2 (Unicode/emoji)"
+    )
+    send_parser.add_argument(
+        "--echo", action="store_true", help="Echo raw serial lines (debug)"
+    )
 
     # GPS subcommand (placeholder for future)
     gps_parser = subparsers.add_parser("gps", help="GPS operations (coming soon)")
@@ -100,9 +117,83 @@ def main():
                 sys.argv.append("--echo")
             sms_main()
         elif args.sms_command == "send":
-            print("📤 SMS sending feature coming soon!")
-            print(f"Will send: '{args.message}' to {args.recipient}")
-            sys.exit(1)
+            # Import and initialize modem
+            from .modem import Modem, find_sim7600_port
+            from .logger_config import setup_logging
+            
+            logger = setup_logging(None, console=True)
+            
+            # Auto-detect or use specified port
+            port = args.port
+            if port.lower() == "auto":
+                logger.info("Auto-detecting SIM7600 modem...")
+                detected_port = find_sim7600_port()
+                if detected_port:
+                    port = detected_port
+                    logger.info(f"Found SIM7600 modem on {port}")
+                else:
+                    logger.error("Could not find SIM7600 modem. Specify --port manually.")
+                    sys.exit(1)
+            else:
+                logger.info(f"Using specified port: {port}")
+            
+            # Check for non-ASCII characters and warn user
+            try:
+                args.message.encode("ascii")
+            except UnicodeEncodeError:
+                # Message contains non-ASCII characters
+                print("\n⚠️  WARNING: Your message contains special characters (accents, emoji, etc.)")
+                print("The SIM7600 modem has limited support for these characters.")
+                print("Your message may appear corrupted or garbled on the recipient's phone.")
+                print(f"\nOriginal message: {args.message}")
+                
+                # Show what might be sent
+                import unicodedata
+                normalized = unicodedata.normalize('NFD', args.message)
+                preview = ''
+                for char in normalized:
+                    if ord(char) < 128:
+                        preview += char
+                    elif unicodedata.category(char) == 'Mn':
+                        continue
+                    else:
+                        preview += '?'
+                print(f"May be sent as:     {preview}")
+                
+                response = input("\nDo you want to continue anyway? (y/N): ")
+                if response.lower() != 'y':
+                    logger.info("Message sending cancelled by user.")
+                    sys.exit(0)
+                print()  # Empty line for clarity
+            
+            # Open modem
+            modem = Modem(port, args.baud, echo_raw=args.echo)
+            try:
+                modem.open()
+                logger.info(f"Connected to modem on {port}")
+                
+                # Send SMS
+                logger.info(f"Sending SMS to {args.recipient}...")
+                logger.info(f"Message: {args.message}")
+                if args.encoding != "auto":
+                    logger.info(f"Using {args.encoding.upper()} encoding")
+                
+                if modem.send_sms(args.recipient, args.message, encoding=args.encoding):
+                    logger.info("✅ SMS sent successfully!")
+                    sys.exit(0)
+                else:
+                    logger.error("❌ Failed to send SMS")
+                    logger.error("Try running with --echo flag to see modem responses")
+                    sys.exit(1)
+                    
+            except ValueError as e:
+                logger.error(f"Invalid input: {e}")
+                sys.exit(1)
+            except Exception as e:
+                logger.error(f"Error: {e}")
+                sys.exit(1)
+            finally:
+                modem.close()
         else:
             sms_parser.print_help()
     elif args.command == "gps":

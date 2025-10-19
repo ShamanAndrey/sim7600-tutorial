@@ -380,6 +380,14 @@ See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed guides on implementi
 - **[docs/PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md)** - High-level architecture explanation
 - **[docs/ARCHITECTURE_DECISIONS.md](docs/ARCHITECTURE_DECISIONS.md)** - Design rationale and choices
 
+### SMS Send Feature
+
+- **[docs/USAGE_EXAMPLES.md](docs/USAGE_EXAMPLES.md)** - Detailed SMS send usage examples
+- **[docs/SMS_SEND_QUICK_REFERENCE.md](docs/SMS_SEND_QUICK_REFERENCE.md)** - Quick command reference
+- **[docs/SMS_SEND_IMPLEMENTATION.md](docs/SMS_SEND_IMPLEMENTATION.md)** - Technical implementation details
+- **[docs/SMS_ENCODING_NOTE.md](docs/SMS_ENCODING_NOTE.md)** - Character encoding explained
+- **[docs/SMS_SEND_FEATURE_COMPLETE.md](docs/SMS_SEND_FEATURE_COMPLETE.md)** - Complete feature summary
+
 ### Migration & Publishing
 
 - **[docs/MIGRATION_GUIDE.md](docs/MIGRATION_GUIDE.md)** - Upgrade from old `sms_logger` version
